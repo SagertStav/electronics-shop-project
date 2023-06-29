@@ -13,7 +13,11 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +25,13 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return round(self.price*self.quantity,2)
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        #self.price *= self.pay_rate  # так не округляет
+        self.price = round(self.pay_rate * self.price, 2)
+        print(f"Проверка измененности цены в самой фикстуре после её выполнения: price={self.price}")
+
