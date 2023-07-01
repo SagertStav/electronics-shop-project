@@ -58,7 +58,8 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         ''' instantiate_from_csv() - класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_ '''
-        #print(__name__)
+        cls.all.clear() # очищаю все экземпляры из списка
+
         try:
            with open('..\src\items.csv', newline='') as csvfile:
                #для run проходЯт только ДВЕ точки '..\src\items.csv', а для тестов в терминале (poetry run pytest --cov) - одна

@@ -46,12 +46,10 @@ def test_apply_discount():
 
 def test_instantiate_from_csv():
     ''' проверяем правильность закачки и создания всех экземпляров в Items из файла ..\\src\\items.csv '''
-    nomenkl_was=len(src.item.Item.all)  # замеряем численность экземпляров до закачки
+    #nomenkl_was=len(src.item.Item.all)  # замеряем численность экземпляров до закачки
     src.item.Item.instantiate_from_csv()
-    assert len(src.item.Item.all) == (nomenkl_was + 5)
-    #print( {src.item.Item.all[k].name for k in range(len(src.item.Item.all))})
+    assert len(src.item.Item.all) == 5 # или(nomenkl_was + 5) - если не очищать
     assert {'Смартфон', 'Ноутбук', 'Кабель', 'Мышка', 'Клавиатура'}.issubset({src.item.Item.all[k].name for k in range(len(src.item.Item.all))})
-    #print(src.item.Item.all[len(src.item.Item.all)-1].name, type(src.item.Item.all[len(src.item.Item.all)-1].price))
     assert src.item.Item.all[len(src.item.Item.all) - 1].name == 'Клавиатура'  # последние по файлу CSV - 5 клавиатур по цене 75
     assert src.item.Item.all[len(src.item.Item.all)-1].price == 75
 def test_string_to_number():
