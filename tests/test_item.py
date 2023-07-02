@@ -65,9 +65,22 @@ def test_name_setter_and_getter():
     #print('Стал ', item1.name)
     assert item1.name == "Пульсоксим" #усекается
 
+def test_repr():
+    item1 = src.item.Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == 'Смартфон'
+
+def test_str():
+    item1 = src.item.Item("Смартфон", 10000, 20)
+    assert str(item1) == 'Смартфон'
+
 
 test_calculate_total_price()
 test_apply_discount()
 test_instantiate_from_csv()
 test_string_to_number()
 test_name_setter_and_getter()
+
+#ДЗ - магические методы:
+test_repr()
+test_str()

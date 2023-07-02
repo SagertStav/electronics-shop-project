@@ -26,6 +26,15 @@ class Item:
         self.quantity = int(quantity) #не дает использовать string_to_number(quantity) - is not defined
         self.all.append(self)
 
+    def __repr__(self):
+        """ представление экземпляра класса Item в отладке: Item('Товар', цена, количество """
+        return f"Item('{self.name}', {int(self.price)}, {self.quantity})"
+
+    def __str__(self):
+        """ представление экземпляра класса Item для пользователя, при печати: 'Товар' """
+        return self.name
+
+
     # Геттер для name
     @property
     def name(self):
