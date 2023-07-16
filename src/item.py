@@ -1,5 +1,11 @@
 import csv
+import os
 
+"""class FileNotFoundError(BaseException):
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Неизвестная ошибка отсутствия файла'
+    def __str__(self):
+        return self.message """
 
 class Item:
     """
@@ -71,14 +77,14 @@ class Item:
         cls.all.clear() # очищаю все экземпляры из списка
 
         try:
-           with open('..\src\items.csv', newline='') as csvfile:
+           with open('..\src\items.csv' if os.path.isfile('..\src\items.csv') else '.\src\items.csv', newline='') as csvfile:
                #для run проходЯт только ДВЕ точки '..\src\items.csv', а для тестов в терминале (poetry run pytest --cov) - одна
                for row in csv.DictReader(csvfile):
                    Item(**row)
         except FileNotFoundError:
-            with open('.\src\items.csv', newline='') as csvfile:
-                for row in csv.DictReader(csvfile):
-                    Item(**row)
+#           if __name__ == '__main__':
+            print("# FileNotFoundError: Отсутствует файл item.csv")
+           #return "# FileNotFoundError: Отсутствует файл item.csv"
 
     def __add__(self, other):
         import src.phone
