@@ -84,3 +84,4 @@ test_name_setter_and_getter()
 #ДЗ - магические методы:
 test_repr()
 test_str()
+
