@@ -1,5 +1,6 @@
 import csv
-
+import os
+import src.eshop_exceptions
 
 class Item:
     """
@@ -71,14 +72,20 @@ class Item:
         cls.all.clear() # очищаю все экземпляры из списка
 
         try:
-           with open('..\src\items.csv', newline='') as csvfile:
+           with open('..\src\items.csv' if os.path.isfile('..\src\items.csv') else '.\src\items.csv', newline='') as csvfile:
                #для run проходЯт только ДВЕ точки '..\src\items.csv', а для тестов в терминале (poetry run pytest --cov) - одна
                for row in csv.DictReader(csvfile):
                    Item(**row)
+
         except FileNotFoundError:
-            with open('.\src\items.csv', newline='') as csvfile:
-                for row in csv.DictReader(csvfile):
-                    Item(**row)
+            raise src.eshop_exceptions.CSV_is_absent("Отсутствует файл items.csv")
+            #print(e)
+        except TypeError: #len(**row) != 3:
+            raise src.eshop_exceptions.CSV_is_harmed("Файл items.csv поврежден")
+            print("Файл items.csv поврежден")
+
+
+
 
     def __add__(self, other):
         import src.phone
