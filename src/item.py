@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -79,4 +80,12 @@ class Item:
                 for row in csv.DictReader(csvfile):
                     Item(**row)
 
+    def __add__(self, other):
+        import src.phone
+        if isinstance(other, (Item, src.phone.Phone)):
+           return self.quantity + other.quantity
+        else:
+           s = "Возможно сложение по количеству только экземпляров класса Item или Phone"
+           print(s)
+           return s
 
